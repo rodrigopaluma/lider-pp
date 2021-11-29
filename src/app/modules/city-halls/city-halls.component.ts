@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HeaderService } from 'src/app/shared/services/header.service';
 
 @Component({
   selector: 'app-city-halls',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CityHallsComponent implements OnInit {
 
-  constructor() { }
+  pageTitle = 'Prefeituras';
+
+  constructor(public hs: HeaderService) { }
 
   ngOnInit(): void {
   }
