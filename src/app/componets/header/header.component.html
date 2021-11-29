@@ -1,0 +1,89 @@
+<mat-toolbar>
+  <mat-toolbar-row class="header mat-elevation-z3" fxLayoutAlign="space-between center">
+    <span class="img-header">
+      <img routerLink="/dashboard"
+        routerLinkActive="active"
+        class="logotipo"
+        src="../../../assets/images/logotipo-lider-politicas-publicas.png"
+        alt="Líder Políticas Públicas" />
+      <span>Líder Políticas Públicas</span>
+    </span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button
+      [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <!--Menu-->
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item
+        routerLink="/metas"
+        routerLinkActive="active">
+        <mat-icon>pending_actions</mat-icon>
+        <span>Metas</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item
+        routerLink="/prefeituras"
+        routerLinkActive="active">
+        <mat-icon>assured_workload</mat-icon>
+        <span>Prefeituras</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item
+        routerLink="/secretarias"
+        routerLinkActive="active">
+        <mat-icon>location_city</mat-icon>
+        <span>Secretarias</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item
+        routerLink="/comunicados"
+        routerLinkActive="active">
+        <mat-icon>notifications</mat-icon>
+        <span>Comunicados</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item>
+        <mat-icon>cloud_download</mat-icon>
+        <span>Importação</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item>
+        <mat-icon>cloud_upload</mat-icon>
+        <span>Exportação</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item
+        routerLink="/usuarios"
+        routerLinkActive="active">
+        <mat-icon>groups</mat-icon>
+        <span>Usuários</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item
+        routerLink="/mensagens"
+        routerLinkActive="active">
+        <mat-icon>inbox</mat-icon>
+        <span>Mensagens</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item>
+        <mat-icon>person</mat-icon>
+        <span>Meu perfil</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item>
+        <mat-icon>logout</mat-icon>
+        <span>Sair</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row class="sub-header" fxLayoutAlign="center center">
+    <span>Título da Página</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon">
+      <mat-icon>share</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

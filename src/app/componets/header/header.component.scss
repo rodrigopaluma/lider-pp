@@ -1,0 +1,20 @@
+.img-header {
+  max-height: 54px;
+  .logotipo {
+    max-width: 44px;
+  }
+  span {
+    margin-left: 5px;
+    margin-top: 8px;
+    position: absolute;
+    font-size: 24px;
+    color: #104a79;
+    font-weight: 600;
+  }
+}
+
+:host ::ng-deep {
+  .mat-toolbar-row {
+    padding: 0 10%;
+  }
+}
