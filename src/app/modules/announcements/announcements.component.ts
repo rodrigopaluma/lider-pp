@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HeaderService } from 'src/app/shared/services/header.service';
 
 @Component({
   selector: 'app-announcements',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnnouncementsComponent implements OnInit {
 
-  constructor() { }
+  pageTitle = 'Comunicados';
+
+  constructor(public hs: HeaderService) {
+    this.hs.pTitle = this.pageTitle;
+  }
 
   ngOnInit(): void {
   }

@@ -10,7 +10,9 @@ export class CityHallsComponent implements OnInit {
 
   pageTitle = 'Prefeituras';
 
-  constructor(public hs: HeaderService) { }
+  constructor(public hs: HeaderService) {
+    this.hs.pTitle = this.pageTitle;
+  }
 
   ngOnInit(): void {
   }
