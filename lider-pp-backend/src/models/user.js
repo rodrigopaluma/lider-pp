@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose = require('../database');
 
 const UserSchema = new mongoose.Schema({
-    nome: {
+    name: {
         type: String,
         require: true
     },
