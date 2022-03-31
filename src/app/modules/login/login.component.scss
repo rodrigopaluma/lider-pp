@@ -1,0 +1,40 @@
+.img-header {
+  width: 60%;
+  margin-bottom: 30px;
+  .logotipo {
+    max-width: 100px;
+  }
+  span {
+    font-size: 24px;
+    color: #104a79;
+    font-weight: 600;
+  }
+}
+
+.formBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: url(~src/assets/images/back-login.webp) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 60%;
+}
+
+.full-width {
+  width: 100%;
+}

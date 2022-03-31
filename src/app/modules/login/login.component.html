@@ -1,1 +1,21 @@
-<p>login works!</p>
+<div fxLayout="row" fxFlex="100%" [style.height]="'100vh'" fxLayoutAlign="center center">
+  <div class="formBox" fxLayout="column" fxFlex="30" fxFlexFill>
+    <div class="img-header">
+      <img class="logotipo" src="../../../assets/images/logotipo-lider-politicas-publicas.png"
+        alt="Líder Políticas Públicas" /><br>
+      <span>Líder Políticas Públicas</span>
+    </div>
+    <form class="form">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Usuario</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Senha</mat-label>
+        <input matInput type="password">
+      </mat-form-field>
+      <button (click)="login()" [style.width]="'100%'" mat-flat-button color="primary">Entrar</button>
+    </form>
+  </div>
+  <div class="imageBox" fxFlex="70" fxFlexFill></div>
+</div>

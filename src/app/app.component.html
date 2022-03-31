@@ -1,4 +1,4 @@
-<app-header></app-header>
-<div [style.padding]="'0 10%'">
+<app-header *ngIf="router.url !== '/'"></app-header>
+<div [style.padding]="router.url !== '/' ? '0 10%' : ''">
   <router-outlet></router-outlet>
 </div>
