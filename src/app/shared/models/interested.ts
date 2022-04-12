@@ -1,5 +1,5 @@
 export interface Interested {
-  interestedCode?: string;
+  id?: number;
 
   activeCode?: string;
   userCode?: string;

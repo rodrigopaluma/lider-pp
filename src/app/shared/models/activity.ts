@@ -1,5 +1,5 @@
 export interface Activity {
-  activityCode?: string;
+  id?: number;
   activityName?: string;
   activityPriority?: string;
   activityState?: string;

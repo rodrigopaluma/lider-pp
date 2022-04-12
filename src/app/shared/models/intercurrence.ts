@@ -1,5 +1,5 @@
 export interface Intercurrence {
-  intercurrenceCode?: string;
+  id?: number;
   intercurrenceDate?: string;
   intercurrenceDescription?: string;
   intercurrenceUser?: string;

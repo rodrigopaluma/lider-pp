@@ -1,5 +1,5 @@
 export interface Release {
-  releaseCode?: string;
+  id?: number;
   releaseExpirationDate?: string;
   releaseDescription?: string;
   releaseState?: string;
