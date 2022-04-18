@@ -1,1 +1,48 @@
-<p>city-halls works!</p>
+<!--
+<mat-selection-list #cityHall [multiple]="false">
+  <mat-list-option *ngFor="let item of items | async" [value]="cityHall">
+    {{item.cityHallName}} - {{item.cityHallProvince}} - {{item.cityHallMayor}}
+  </mat-list-option>
+</mat-selection-list>-->
+
+<mat-form-field appearance="standard">
+  <mat-label>Busca</mat-label>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<mat-table #table [dataSource]="dataSource" matSort [trackBy]="trackByUid" class="animate">
+
+  <ng-container matColumnDef="cityHallName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Município </mat-header-cell>
+    <mat-cell *matCellDef="let city"> {{ city.cityHallName }} </mat-cell>
+  </ng-container>
+
+
+  <ng-container matColumnDef="cityHallProvince">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Estado - UF </mat-header-cell>
+    <mat-cell *matCellDef="let city"> {{ city.cityHallProvince }} </mat-cell>
+  </ng-container>
+
+
+  <ng-container matColumnDef="cityHallMayor">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Nome do(a) Prefeito(a) </mat-header-cell>
+    <mat-cell *matCellDef="let city"> {{ city.cityHallMayor }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
+    <mat-cell *matCellDef="let city">
+      <button mat-icon-button aria-label="Editar">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-icon-button aria-label="Deletar">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;" class="animate"></mat-row>
+</mat-table>
+

@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class HeaderService {
-  pTitle = '';
+  public pTitle = '';
   pSubtitle = '';
   leftSideBar = true;
   rightSideBar = false;
