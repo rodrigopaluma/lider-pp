@@ -82,7 +82,7 @@ export class CityHallsComponent implements AfterViewInit, OnInit {
     const dialogRef = this.dialog.open(EditCityHallComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      // console.log(`Dialog result: ${result}`);
     });
   }
 
@@ -90,7 +90,7 @@ export class CityHallsComponent implements AfterViewInit, OnInit {
     const dialogRef = this.dialog.open(EditCityHallComponent, {data: city});
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      // console.log(`Dialog result: ${result}`);
     });
   }
 

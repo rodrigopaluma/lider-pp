@@ -52,7 +52,6 @@ export class EditCityHallComponent implements OnInit {
               }
 
   ngOnInit(): void {
-    console.log(this.data)
     this.cityHallForm = this.formBuilder.group({
       cityHallCode: [this.data ? this.data.cityHallCode : ''],
       cityHallName: [this.data ? this.data.cityHallName : '', Validators.required],
