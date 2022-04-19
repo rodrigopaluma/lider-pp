@@ -1,21 +1,21 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { HeaderService } from 'src/app/shared/services/header.service';
 
-import {
-  AngularFirestore,
-  AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 import { CityHall } from 'src/app/shared/models/city-hall';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { EditCityHallComponent } from './edit-city-hall/edit-city-hall.component';
+import { CityHallService } from 'src/app/shared/services/city-hall.service';
 
 @Component({
   selector: 'app-city-halls',
   templateUrl: './city-halls.component.html',
   styleUrls: ['./city-halls.component.scss'],
 })
-export class CityHallsComponent implements AfterViewInit {
+export class CityHallsComponent implements AfterViewInit, OnInit {
 
   pageTitle = 'Prefeituras';
 
@@ -26,14 +26,30 @@ export class CityHallsComponent implements AfterViewInit {
   displayedColumns: string[] = ['cityHallName', 'cityHallProvince', 'cityHallMayor', 'actions'];
   dataSource = new MatTableDataSource<any>();
 
+  prefeituras: CityHall[] = [];
+
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  constructor(public hs: HeaderService, private afs: AngularFirestore) {
+  constructor(public hs: HeaderService,
+              private afs: AngularFirestore,
+              public dialog: MatDialog,
+              private cityHallService: CityHallService) {
     // Carregamento de dados em lista
     //this.itemsCollection = afs.collection<CityHall>('cityHalls');
     //this.items = this.itemsCollection.valueChanges();
     hs.pTitle = this.pageTitle;
+  }
+
+  ngOnInit() {
+    this.cityHallService.getCityHalls().subscribe((res: any) => {
+      this.prefeituras = res.map((e: any)=> {
+        return {
+          cityHallCode: e.payload.doc.id,
+          ...e.payload.doc.data() as CityHall
+        }
+      })
+    });
   }
 
   ngAfterViewInit(): void {
@@ -56,6 +72,26 @@ export class CityHallsComponent implements AfterViewInit {
 
   trackByUid(item: any) {
     return item.cityHallCode;
+  }
+
+  deleteCityHall(cityHallCode: string) {
+    this.cityHallService.deleteCityHall(cityHallCode);
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(EditCityHallComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openDialogEdit(city : CityHall) {
+    const dialogRef = this.dialog.open(EditCityHallComponent, {data: city});
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
 }

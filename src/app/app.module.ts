@@ -33,6 +33,10 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { EditCityHallComponent } from './modules/city-halls/edit-city-hall/edit-city-hall.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAYjrhvrcMVupjwN4cAEQLYfkkKz7xLnQ8",
@@ -75,7 +79,12 @@ const firebaseConfig = {
     MatInputModule,
     MatFormFieldModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    MatTooltipModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent],

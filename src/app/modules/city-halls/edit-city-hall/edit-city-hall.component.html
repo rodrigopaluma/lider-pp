@@ -1,1 +1,31 @@
-<p>edit-city-hall works!</p>
+<form [formGroup]="cityHallForm" (ngSubmit)="onSubmit()">
+  <div fxLayout="row wrap" fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
+    <div fxFlex="33" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'98%'">
+        <mat-label>Município</mat-label>
+        <input matInput formControlName="cityHallName" placeholder="Nome do Município" required>
+      </mat-form-field>
+    </div>
+    <div fxFlex="34" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'98%'">
+        <mat-label>Estado(UF)</mat-label>
+        <mat-select formControlName="cityHallProvince" required>
+          <mat-option>Selecione a UF</mat-option>
+          <mat-option *ngFor="let item of provinceList" [value]="item.value">
+            {{item.viewValue}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="cityHallForm.hasError('required')">Selecione uma UF</mat-error>
+        <mat-hint>{{cityHallForm.value?.sound}}</mat-hint>
+      </mat-form-field>
+    </div>
+    <div fxFlex="33" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'98%'">
+        <mat-label>Nome do(a) Prefeito(a)</mat-label>
+        <input matInput formControlName="cityHallMayor" placeholder="Nome Completo" required>
+      </mat-form-field>
+    </div>
+    <button mat-dialog-close mat-raised-button>Fechar</button>
+    <button type="submit" [mat-dialog-close]="true" mat-raised-button color="primary" [disabled]="!cityHallForm.valid">Salvar</button>
+  </div>
+</form>
