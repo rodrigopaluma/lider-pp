@@ -39,6 +39,10 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell fxFlex="10" *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
         <mat-cell fxFlex="10" *matCellDef="let city">
+          <button mat-icon-button aria-label="Ver Secretarias" (click)="viewSecretaries(city.cityHallCode)">
+            <mat-icon>content_paste</mat-icon>
+          </button>
+
           <button mat-icon-button aria-label="Editar" (click)="openDialogEdit(city)">
             <mat-icon>edit</mat-icon>
           </button>

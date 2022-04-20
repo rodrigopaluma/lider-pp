@@ -14,6 +14,14 @@ export class CityHallService {
     return this.afs.collection('cityHalls').snapshotChanges();
   }
 
+  getSecretariesOnCityHall(cityHallCode: string) {
+    return this.afs.collection('cityHalls/'+ cityHallCode + '/secretaries').snapshotChanges();
+  }
+
+  getIdCityHall(cityHallCode: string) {
+    return this.afs.collection('cityHalls').doc(cityHallCode).snapshotChanges();
+  }
+
   createCityHall(cityHall: CityHall) {
     cityHall.cityHallCode = this.afs.createId();
     return this.afs.collection('cityHalls').doc(cityHall.cityHallCode).set(cityHall);

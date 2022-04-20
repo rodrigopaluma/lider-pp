@@ -9,6 +9,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { EditCityHallComponent } from './edit-city-hall/edit-city-hall.component';
 import { CityHallService } from 'src/app/shared/services/city-hall.service';
+import { SecretariesComponent } from '../secretaries/secretaries.component';
 
 @Component({
   selector: 'app-city-halls',
@@ -30,6 +31,8 @@ export class CityHallsComponent implements AfterViewInit, OnInit {
 
   @ViewChild(MatSort)
   sort!: MatSort;
+
+  existSecretary: boolean = false;
 
   constructor(public hs: HeaderService,
               private afs: AngularFirestore,
@@ -91,6 +94,23 @@ export class CityHallsComponent implements AfterViewInit, OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       // console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  verifySecretaries(cityHallCode: string) {
+    this.cityHallService.getSecretariesOnCityHall(cityHallCode).subscribe((res: any) => {
+      if (res.secretaries.length > 0) {
+        this.existSecretary = true;
+      } else {
+        this.existSecretary = false;
+      }
+    });
+  }
+
+  viewSecretaries(city : CityHall) {
+    const dialogRef = this.dialog.open(SecretariesComponent, {
+      data: city,
+      width: '60%'
     });
   }
 
