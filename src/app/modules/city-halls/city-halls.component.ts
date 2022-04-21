@@ -20,10 +20,6 @@ export class CityHallsComponent implements AfterViewInit, OnInit {
 
   pageTitle = 'Prefeituras';
 
-  // Carregamento de dados em lista
-  //private itemsCollection: AngularFirestoreCollection<CityHall>;
-  //items: Observable<CityHall[]>;
-
   displayedColumns: string[] = ['cityHallName', 'cityHallProvince', 'cityHallMayor', 'actions'];
   dataSource = new MatTableDataSource<any>();
 
@@ -38,10 +34,7 @@ export class CityHallsComponent implements AfterViewInit, OnInit {
               private afs: AngularFirestore,
               public dialog: MatDialog,
               private cityHallService: CityHallService) {
-    // Carregamento de dados em lista
-    //this.itemsCollection = afs.collection<CityHall>('cityHalls');
-    //this.items = this.itemsCollection.valueChanges();
-    hs.pTitle = this.pageTitle;
+            hs.pTitle = this.pageTitle;
   }
 
   ngOnInit() {
@@ -94,16 +87,6 @@ export class CityHallsComponent implements AfterViewInit, OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       // console.log(`Dialog result: ${result}`);
-    });
-  }
-
-  verifySecretaries(cityHallCode: string) {
-    this.cityHallService.getSecretariesOnCityHall(cityHallCode).subscribe((res: any) => {
-      if (res.secretaries.length > 0) {
-        this.existSecretary = true;
-      } else {
-        this.existSecretary = false;
-      }
     });
   }
 

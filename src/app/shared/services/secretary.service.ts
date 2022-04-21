@@ -14,16 +14,16 @@ export class SecretaryService {
     return this.afs.collection(`cityHalls/${cityHallCode}/secretaries`).snapshotChanges();
   }
 
-  createSecretary(secretary: Secretary) {
+  createSecretary(secretary: Secretary, cityHallCode: string) {
     secretary.secCode = this.afs.createId();
-    return this.afs.collection('secretaries').doc(secretary.secCode).set(secretary);
+    return this.afs.collection(`cityHalls/${cityHallCode}/secretaries`).doc(secretary.secCode).set(secretary);
   }
 
-  updateSecretary(secretary: Secretary) {
-    this.afs.collection('secretaries').doc(secretary.secCode).set(secretary);
+  updateSecretary(secretary: Secretary, cityHallCode: string) {
+    this.afs.collection(`cityHalls/${cityHallCode}/secretaries`).doc(secretary.secCode).set(secretary);
   }
 
-  deleteSecretary(secCode: string){
-    this.afs.collection('secretaries').doc(secCode).delete();
+  deleteSecretary(secCode: string, cityHallCode: string){
+    this.afs.collection(`cityHalls/${cityHallCode}/secretaries`).doc(secCode).delete();
   }
 }

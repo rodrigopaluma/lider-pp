@@ -5,8 +5,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CityHall } from 'src/app/shared/models/city-hall';
 import { Secretary } from 'src/app/shared/models/secretary';
-import { CityHallService } from 'src/app/shared/services/city-hall.service';
-import { HeaderService } from 'src/app/shared/services/header.service';
 import { SecretaryService } from 'src/app/shared/services/secretary.service';
 import { EditSecretaryComponent } from './edit-secretary/edit-secretary.component';
 
@@ -29,58 +27,16 @@ export class SecretariesComponent implements OnInit {
   constructor(private afs: AngularFirestore,
               public dialog: MatDialog,
               private secretaryService: SecretaryService,
-              @Inject(MAT_DIALOG_DATA) public data: CityHall,
-              private cityHallService: CityHallService) {}
+              @Inject(MAT_DIALOG_DATA) public data: string) {}
 
   ngOnInit() {
-
-    const cityHallCode = this.cityHallService.getCityHalls().subscribe((res: any) => {
-      this.prefeituras = res.map((e: any)=> {
-        return {
-          cityHallCode: e.payload.doc.id,
-          ...e.payload.doc.data() as CityHall
-        }
-      })
+    this.afs.collection(`/cityHalls/${this.data}/secretaries`).valueChanges().subscribe(values => {
+      // console.log(values)
+      this.secretarias = values as Secretary[];
     });
-    this.afs.collection<Secretary>(`cityHalls/${cityHallCode}/secretaries`).valueChanges().subscribe((res: any) => {
-      this.secretarias = res.map((e: any)=> {
-        return {
-          secCode: e.payload.doc.id,
-          ...e.payload.doc.data() as Secretary
-        }
-      })
-    });
-    /* this.afs.collection<Secretary>(`cityHalls/${cityHallCode}/secretaries`).valueChanges().subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.sort = this.sort;
-    }); */
   }
 
-  ngAfterViewInit(): void {
-
-    const cityHallCode = this.cityHallService.getCityHalls().subscribe((res: any) => {
-      this.prefeituras = res.map((e: any)=> {
-        return {
-          cityHallCode: e.payload.doc.id,
-          ...e.payload.doc.data() as CityHall
-        }
-      })
-    });
-    this.afs.collection<Secretary>(`cityHalls/${cityHallCode}/secretaries`).valueChanges().subscribe((res: any) => {
-      this.secretarias = res.map((e: any)=> {
-        return {
-          secCode: e.payload.doc.id,
-          ...e.payload.doc.data() as Secretary
-        }
-      })
-    });
-    /* this.afs.collection<Secretary>(`cityHalls/${cityHallCode}/secretaries`).valueChanges().subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.sort = this.sort;
-    }); */
-  }
-
-   applyFilter(filterValue: string) {
+  applyFilter(filterValue: string) {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
@@ -90,12 +46,14 @@ export class SecretariesComponent implements OnInit {
     return item.cityHallCode;
   }
 
-  deleteSecretary(secCode: string) {
-    this.secretaryService.deleteSecretary(secCode);
+  deleteSecretary(secCode: string, cityHallCode: string) {
+    this.secretaryService.deleteSecretary(secCode, cityHallCode);
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(EditSecretaryComponent);
+    const dialogRef = this.dialog.open(EditSecretaryComponent, {data: {
+      cityHallCode: this.data
+    }});
 
     dialogRef.afterClosed().subscribe(result => {
       // console.log(`Dialog result: ${result}`);

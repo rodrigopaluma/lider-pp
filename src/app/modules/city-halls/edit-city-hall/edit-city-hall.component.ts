@@ -52,6 +52,10 @@ export class EditCityHallComponent implements OnInit {
               }
 
   ngOnInit(): void {
+    this.createForm();
+  }
+
+  createForm() {
     this.cityHallForm = this.formBuilder.group({
       cityHallCode: [this.data ? this.data.cityHallCode : ''],
       cityHallName: [this.data ? this.data.cityHallName : '', Validators.required],
@@ -75,6 +79,5 @@ export class EditCityHallComponent implements OnInit {
       this.cityHallService.createCityHall(this.cityHallForm.value);
       this.cityHallForm.reset();
     }
-
   }
 }

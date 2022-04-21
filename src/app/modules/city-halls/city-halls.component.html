@@ -1,9 +1,3 @@
-<!--
-<mat-selection-list #cityHall [multiple]="false">
-  <mat-list-option *ngFor="let item of items | async" [value]="cityHall">
-    {{item.cityHallName}} - {{item.cityHallProvince}} - {{item.cityHallMayor}}
-  </mat-list-option>
-</mat-selection-list>-->
 <div fxLayout="column" fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
   <div fxLayout="row wrap" fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
     <mat-form-field appearance="outline" [style.margin-top]="'10px'" [style.width]="'25%'">
@@ -39,15 +33,15 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell fxFlex="10" *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
         <mat-cell fxFlex="10" *matCellDef="let city">
-          <button mat-icon-button aria-label="Ver Secretarias" (click)="viewSecretaries(city.cityHallCode)">
+          <button mat-icon-button matTooltip="Ver Secretarias" (click)="viewSecretaries(city.cityHallCode)">
             <mat-icon>content_paste</mat-icon>
           </button>
 
-          <button mat-icon-button aria-label="Editar" (click)="openDialogEdit(city)">
+          <button mat-icon-button matTooltip="Editar Prefeitura" (click)="openDialogEdit(city)">
             <mat-icon>edit</mat-icon>
           </button>
 
-          <button mat-icon-button aria-label="Deletar" (click)="deleteCityHall(city.cityHallCode)">
+          <button mat-icon-button matTooltip="Apagar Prefeitura" (click)="deleteCityHall(city.cityHallCode)">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>
