@@ -27,7 +27,12 @@
 
       <ng-container matColumnDef="userProfile">
         <mat-header-cell fxFlex="10" *matHeaderCellDef mat-sort-header> Permissao </mat-header-cell>
-        <mat-cell fxFlex="10" *matCellDef="let user"> {{ user.userProfile }} </mat-cell>
+        <mat-cell fxFlex="10" *matCellDef="let user">
+          <span *ngIf="user.userProfile == 'ADMIN'">Administrador</span>
+          <span *ngIf="user.userProfile == 'CITYHALL'">Prefeito</span>
+          <span *ngIf="user.userProfile == 'SECRETARY'">Secretário</span>
+          <span *ngIf="user.userProfile == 'USER'">Usuário</span>
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="cityHallName">

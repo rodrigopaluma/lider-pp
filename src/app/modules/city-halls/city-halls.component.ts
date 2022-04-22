@@ -28,8 +28,6 @@ export class CityHallsComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  existSecretary: boolean = false;
-
   constructor(public hs: HeaderService,
               private afs: AngularFirestore,
               public dialog: MatDialog,
@@ -57,7 +55,7 @@ export class CityHallsComponent implements AfterViewInit, OnInit {
     this.afs.collection<CityHall>('cityHalls').valueChanges().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
-    })
+    });
   }
 
    applyFilter(filterValue: string) {
