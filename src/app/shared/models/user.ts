@@ -5,6 +5,8 @@ export interface User {
   userPassword?: string;
   userProfile?: string;
 
-  citiHallCode?: string;
-  secCode?: string;
+  cityHallCode: string;
+  cityHallName?: string;
+  secCode: string;
+  secName?: string;
 }

@@ -1,1 +1,62 @@
-<p>users works!</p>
+<div fxLayout="column" fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
+  <div fxLayout="row wrap" fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
+    <mat-form-field appearance="outline" [style.margin-top]="'10px'" [style.width]="'25%'">
+      <mat-label>Busca</mat-label>
+      <input matInput  placeholder="Filter">
+    </mat-form-field>
+
+    <button (click)="openDialog()" mat-mini-fab matTooltip="Incluir Prefeitura" color="primary" aria-label="Incluir Prefeitura">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div fxLayout="column" fxFlex="100" fxFlexFill>
+    <mat-table #table [dataSource]="usuarios" matSort [trackBy]="trackByUid" class="animate">
+
+      <ng-container matColumnDef="userName">
+        <mat-header-cell fxFlex="20" *matHeaderCellDef mat-sort-header> Usuario </mat-header-cell>
+        <mat-cell fxFlex="20" *matCellDef="let user"> {{ user.userName }} </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="userEmail">
+        <mat-header-cell fxFlex="15" *matHeaderCellDef mat-sort-header> E-mail </mat-header-cell>
+        <mat-cell fxFlex="15" *matCellDef="let user"> {{ user.userEmail }} </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="userProfile">
+        <mat-header-cell fxFlex="10" *matHeaderCellDef mat-sort-header> Permissao </mat-header-cell>
+        <mat-cell fxFlex="10" *matCellDef="let user"> {{ user.userProfile }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="cityHallName">
+        <mat-header-cell fxFlex="15" *matHeaderCellDef mat-sort-header> Prefeitura </mat-header-cell>
+        <mat-cell fxFlex="15" *matCellDef="let user"> {{ user.cityHallName }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="secName">
+        <mat-header-cell fxFlex="30" *matHeaderCellDef mat-sort-header> Secretaria </mat-header-cell>
+        <mat-cell fxFlex="30" *matCellDef="let user"> {{ user.secName }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell fxFlex="10" *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
+        <mat-cell fxFlex="10" *matCellDef="let user">
+
+          <button mat-icon-button matTooltip="Editar Prefeitura" (click)="openDialogEdit(user)">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button mat-icon-button matTooltip="Apagar Prefeitura" (click)="deleteUser(user.userCode)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="animate"></mat-row>
+    </mat-table>
+  </div>
+</div>
+
