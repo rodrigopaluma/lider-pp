@@ -5,17 +5,17 @@
         alt="Líder Políticas Públicas" /><br>
       <span>Líder Políticas Públicas</span>
     </div>
-    <form class="form">
+    <div class="form">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Usuario</mat-label>
-        <input matInput>
+        <input matInput type="email" #userEmail required>
       </mat-form-field>
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Senha</mat-label>
-        <input matInput type="password">
+        <input matInput type="password" #userPassword required>
       </mat-form-field>
-      <button (click)="login()" [style.width]="'100%'" mat-flat-button color="primary">Entrar</button>
-    </form>
+      <button (click)="authService.SignIn(userEmail.value, userPassword.value)" [style.width]="'100%'" mat-flat-button color="primary">Entrar</button>
+    </div>
   </div>
   <div class="imageBox" fxFlex="70" fxFlexFill></div>
 </div>

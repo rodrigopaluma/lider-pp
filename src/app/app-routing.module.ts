@@ -9,15 +9,17 @@ import { MessagesComponent } from './modules/messages/messages.component';
 import { SecretariesComponent } from './modules/secretaries/secretaries.component';
 import { UsersComponent } from './modules/users/users.component';
 
+import { GuardGuard } from '../../src/app/shared/guard/auth/guard.guard';
+
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'prefeituras', component: CityHallsComponent },
-  { path: 'secretarias', component: SecretariesComponent },
-  { path: 'metas', component: GoalsComponent },
-  { path: 'usuarios', component: UsersComponent },
-  { path: 'comunicados', component: AnnouncementsComponent },
-  { path: 'mensagens', component: MessagesComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [GuardGuard]  },
+  { path: 'prefeituras', component: CityHallsComponent, canActivate: [GuardGuard] },
+  { path: 'secretarias', component: SecretariesComponent, canActivate: [GuardGuard] },
+  { path: 'metas', component: GoalsComponent, canActivate: [GuardGuard] },
+  { path: 'usuarios', component: UsersComponent, canActivate: [GuardGuard] },
+  { path: 'comunicados', component: AnnouncementsComponent, canActivate: [GuardGuard] },
+  { path: 'mensagens', component: MessagesComponent, canActivate: [GuardGuard] },
 ];
 
 @NgModule({

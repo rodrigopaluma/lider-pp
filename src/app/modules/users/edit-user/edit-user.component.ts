@@ -93,7 +93,7 @@ export class EditUserComponent implements OnInit {
   }
 
   onSubmit() {
-    const values = {
+    const values: any = {
       cityHallCode: this.userForm.value.cityHall.cityHallCode,
       cityHallName: this.userForm.value.cityHall.cityHallName,
       secCode: this.userForm.value.sec.secCode,
