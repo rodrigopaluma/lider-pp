@@ -38,6 +38,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { EditSecretaryComponent } from './modules/secretaries/edit-secretary/edit-secretary.component';
+import { EditUserComponent } from './modules/users/edit-user/edit-user.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAYjrhvrcMVupjwN4cAEQLYfkkKz7xLnQ8",
@@ -64,7 +65,8 @@ const firebaseConfig = {
     HeaderComponent,
     SidebarComponent,
     EditCityHallComponent,
-    EditSecretaryComponent
+    EditSecretaryComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,

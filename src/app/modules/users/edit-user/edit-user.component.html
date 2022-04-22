@@ -1,0 +1,61 @@
+<div fxLayoutAlign="center center">
+  <h3 *ngIf="!data">Cadastro de Usuário</h3>
+  <h3 *ngIf="data">Edição de Usuário</h3>
+</div>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <div fxLayout="row wrap" fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
+    <div fxFlex="33" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'98%'">
+        <mat-label>Nome do Usuário</mat-label>
+        <input matInput formControlName="userName" placeholder="Nome do Usuário" required>
+      </mat-form-field>
+    </div>
+    <div fxFlex="33" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'98%'">
+        <mat-label>E-mail do Usuário</mat-label>
+        <input matInput formControlName="userEmail" placeholder="E-mail do Usuário" required>
+      </mat-form-field>
+    </div>
+    <div fxFlex="34" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'98%'">
+        <mat-label>Perfil do Usuário</mat-label>
+        <mat-select formControlName="userProfile" required>
+          <mat-option>Selecione a Permissão</mat-option>
+          <mat-option *ngFor="let item of profileList" [value]="item.value">
+            {{item.viewValue}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="userForm.hasError('required')">Selecione um Perfil</mat-error>
+        <mat-hint>{{userForm.value?.sound}}</mat-hint>
+      </mat-form-field>
+    </div>
+    <div fxFlex="60" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'98%'">
+        <mat-label>Prefeitura</mat-label>
+        <mat-select formControlName="cityHall" [compareWith]="compareCity" required>
+          <mat-option>Selecione a Prefeitura</mat-option>
+          <mat-option *ngFor="let item of prefeituras" [value]="item">
+            {{item.cityHallName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="userForm.hasError('required')">Selecione uma Prefeitura</mat-error>
+        <mat-hint>{{userForm.value?.sound}}</mat-hint>
+      </mat-form-field>
+    </div>
+    <div fxFlex="40" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'98%'">
+        <mat-label>Secretaria</mat-label>
+        <mat-select formControlName="sec" [compareWith]="compareSec" required>
+          <mat-option>Selecione a Secretaria</mat-option>
+          <mat-option *ngFor="let item of secretarias" [value]="item">
+            {{item.secName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="userForm.hasError('required')">Selecione uma Secretaria</mat-error>
+        <mat-hint>{{userForm.value?.sound}}</mat-hint>
+      </mat-form-field>
+    </div>
+    <button mat-dialog-close mat-raised-button>Fechar</button>
+    <button type="submit" [mat-dialog-close]="true" mat-raised-button color="primary" [disabled]="!userForm.valid">Salvar</button>
+  </div>
+</form>
