@@ -21,18 +21,7 @@ export class AuthService {
     public router: Router,
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
-    /* Saving user data in localstorage when
-    logged in and setting up null when logged out */
-    this.afAuth.authState.subscribe((user) => {
-      if (user) {
-        this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user')!);
-      } else {
-        localStorage.setItem('user', 'null');
-        JSON.parse(localStorage.getItem('user')!);
-      }
-    });
+
   }
 
   // Sign in with email/password
@@ -40,11 +29,11 @@ export class AuthService {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['prefeituras']);
-          console.log('Passei no Login')
-        });
+        // console.log(result)
         this.SetUserData(result.user);
+        this.router.navigate(['prefeituras']);
+        // console.log('Passei no Login')
+
       })
       .catch((error) => {
         window.alert(error.message);
@@ -90,7 +79,8 @@ export class AuthService {
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null && user.emailVerified !== false ? true : false;
+    // console.log(user)
+    return user !== null ? true : false;
   }
 
   // Sign in with Google
@@ -131,6 +121,7 @@ export class AuthService {
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
     };
+    localStorage.setItem('user', JSON.stringify(userData));
     return userRef.set(userData, {
       merge: true,
     });

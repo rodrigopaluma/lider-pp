@@ -15,7 +15,8 @@ export class GuardGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if(this.authService.isLoggedIn !== true) {
+    // console.log(this.authService.isLoggedIn)
+    if(!this.authService.isLoggedIn) {
       this.router.navigate(['/'])
     }
     return true;

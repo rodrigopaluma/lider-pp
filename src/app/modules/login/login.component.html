@@ -14,7 +14,7 @@
         <mat-label>Senha</mat-label>
         <input matInput type="password" #userPassword required>
       </mat-form-field>
-      <button (click)="authService.SignIn(userEmail.value, userPassword.value)" [style.width]="'100%'" mat-flat-button color="primary">Entrar</button>
+      <button type="button" (click)="authService.SignIn(userEmail.value, userPassword.value)" [style.width]="'100%'" mat-flat-button color="primary">Entrar</button>
     </div>
   </div>
   <div class="imageBox" fxFlex="70" fxFlexFill></div>

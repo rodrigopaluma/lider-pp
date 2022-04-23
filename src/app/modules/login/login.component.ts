@@ -12,10 +12,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, public authService: AuthService) { }
 
   ngOnInit(): void {
-  }
-
-  login(){
-    this.router.navigate(['/dashboard']);
+    localStorage.removeItem('user')
   }
 
 
