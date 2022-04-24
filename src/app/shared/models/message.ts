@@ -5,4 +5,5 @@ export interface Message {
   messageReceived?: boolean;
   messageReceiver?: string;
   messageReceivingDate?: string;
+  messageCode?: string;
 }
