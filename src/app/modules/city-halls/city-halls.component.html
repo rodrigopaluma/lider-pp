@@ -1,6 +1,6 @@
 <div fxLayout="column" fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
   <div fxLayout="row wrap" fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
-    <mat-form-field appearance="outline" [style.margin-top]="'10px'" [style.width]="'25%'">
+    <mat-form-field appearance="outline" [style.margin-top]="'10px'" fxFlex="25" fxFlex.xs="70">
       <mat-label>Busca</mat-label>
       <input matInput  placeholder="Filter">
     </mat-form-field>
@@ -14,36 +14,43 @@
     <mat-table #table [dataSource]="prefeituras" matSort [trackBy]="trackByUid" class="animate">
 
       <ng-container matColumnDef="cityHallName">
-        <mat-header-cell fxFlex="40" *matHeaderCellDef mat-sort-header> Município </mat-header-cell>
-        <mat-cell fxFlex="40" *matCellDef="let city"> {{ city.cityHallName }} </mat-cell>
+        <mat-header-cell fxFlex.xs="65" fxFlex="40" *matHeaderCellDef mat-sort-header> Município </mat-header-cell>
+        <mat-cell fxFlex.xs="65" fxFlex="40" *matCellDef="let city"> {{ city.cityHallName }} </mat-cell>
       </ng-container>
 
 
       <ng-container matColumnDef="cityHallProvince">
-        <mat-header-cell fxFlex="10" *matHeaderCellDef mat-sort-header> Estado - UF </mat-header-cell>
-        <mat-cell fxFlex="10" *matCellDef="let city"> {{ city.cityHallProvince }} </mat-cell>
+        <mat-header-cell fxFlex="20" *matHeaderCellDef mat-sort-header> UF </mat-header-cell>
+        <mat-cell fxFlex="20" *matCellDef="let city"> {{ city.cityHallProvince }} </mat-cell>
       </ng-container>
 
 
       <ng-container matColumnDef="cityHallMayor">
-        <mat-header-cell fxFlex="40" *matHeaderCellDef mat-sort-header> Nome do(a) Prefeito(a) </mat-header-cell>
-        <mat-cell fxFlex="40" *matCellDef="let city"> {{ city.cityHallMayor }} </mat-cell>
+        <mat-header-cell fxHide.xs fxFlex="40" *matHeaderCellDef mat-sort-header> Nome do(a) Prefeito(a) </mat-header-cell>
+        <mat-cell fxHide.xs fxFlex="40" *matCellDef="let city"> {{ city.cityHallMayor }} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="actions">
-        <mat-header-cell fxFlex="10" *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
-        <mat-cell fxFlex="10" *matCellDef="let city">
-          <button mat-icon-button matTooltip="Ver Secretarias" (click)="viewSecretaries(city.cityHallCode)">
-            <mat-icon>content_paste</mat-icon>
+        <mat-header-cell fxFlex.xs="15" fxFlex="10" *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
+        <mat-cell fxFlex.xs="15" fxFlex="10" *matCellDef="let city">
+          <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon class="material-symbols-outlined">
+              more_vert
+            </mat-icon>
           </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item matTooltip="Ver Secretarias" (click)="viewSecretaries(city.cityHallCode)">
+              <mat-icon>content_paste</mat-icon> Ver Secretarias
+            </button>
 
-          <button mat-icon-button matTooltip="Editar Prefeitura" (click)="openDialogEdit(city)">
-            <mat-icon>edit</mat-icon>
-          </button>
+            <button mat-menu-item matTooltip="Editar Prefeitura" (click)="openDialogEdit(city)">
+              <mat-icon>edit</mat-icon> Editar Prefeitura
+            </button>
 
-          <button mat-icon-button matTooltip="Apagar Prefeitura" (click)="deleteCityHall(city.cityHallCode)">
-            <mat-icon>delete</mat-icon>
-          </button>
+            <button mat-menu-item matTooltip="Apagar Prefeitura" (click)="deleteCityHall(city.cityHallCode)">
+              <mat-icon>delete</mat-icon> Apagar Prefeitura
+            </button>
+          </mat-menu>
         </mat-cell>
       </ng-container>
 

@@ -1,11 +1,11 @@
 <div fxLayout="column" fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
   <div fxLayout="row wrap" fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
-    <mat-form-field appearance="outline" [style.margin-top]="'10px'" [style.width]="'25%'">
+    <mat-form-field appearance="outline" [style.margin-top]="'10px'" fxFlex="25" fxFlex.xs="70">
       <mat-label>Busca</mat-label>
       <input matInput  placeholder="Filter">
     </mat-form-field>
 
-    <button (click)="openDialog()" mat-mini-fab matTooltip="Incluir Prefeitura" color="primary" aria-label="Incluir Prefeitura">
+    <button (click)="openDialog()" mat-mini-fab matTooltip="Novo Usuário" color="primary" aria-label="Incluir Prefeitura">
       <mat-icon>add</mat-icon>
     </button>
   </div>
@@ -14,20 +14,20 @@
     <mat-table #table [dataSource]="usuarios" matSort [trackBy]="trackByUid" class="animate">
 
       <ng-container matColumnDef="userName">
-        <mat-header-cell fxFlex="20" *matHeaderCellDef mat-sort-header> Usuario </mat-header-cell>
-        <mat-cell fxFlex="20" *matCellDef="let user"> {{ user.userName }} </mat-cell>
+        <mat-header-cell fxFlex.xs="60" fxFlex="20" *matHeaderCellDef mat-sort-header> Usuario </mat-header-cell>
+        <mat-cell fxFlex.xs="60" fxFlex="20" *matCellDef="let user"> {{ user.userName }} </mat-cell>
       </ng-container>
 
 
       <ng-container matColumnDef="userEmail">
-        <mat-header-cell fxFlex="15" *matHeaderCellDef mat-sort-header> E-mail </mat-header-cell>
-        <mat-cell fxFlex="15" *matCellDef="let user"> {{ user.userEmail }} </mat-cell>
+        <mat-header-cell fxHide.xs fxFlex="15" *matHeaderCellDef mat-sort-header> E-mail </mat-header-cell>
+        <mat-cell fxHide.xs fxFlex="15" *matCellDef="let user"> {{ user.userEmail }} </mat-cell>
       </ng-container>
 
 
       <ng-container matColumnDef="userProfile">
-        <mat-header-cell fxFlex="10" *matHeaderCellDef mat-sort-header> Permissao </mat-header-cell>
-        <mat-cell fxFlex="10" *matCellDef="let user">
+        <mat-header-cell fxHide.xs fxFlex="10" *matHeaderCellDef mat-sort-header> Permissao </mat-header-cell>
+        <mat-cell fxHide.xs fxFlex="10" *matCellDef="let user">
           <span *ngIf="user.userProfile == 'ADMIN'">Administrador</span>
           <span *ngIf="user.userProfile == 'CITYHALL'">Prefeito</span>
           <span *ngIf="user.userProfile == 'SECRETARY'">Secretário</span>
@@ -36,26 +36,32 @@
       </ng-container>
 
       <ng-container matColumnDef="cityHallName">
-        <mat-header-cell fxFlex="15" *matHeaderCellDef mat-sort-header> Prefeitura </mat-header-cell>
-        <mat-cell fxFlex="15" *matCellDef="let user"> {{ user.cityHallName }} </mat-cell>
+        <mat-header-cell fxFlex.xs="25" fxFlex="15" *matHeaderCellDef mat-sort-header> Prefeitura </mat-header-cell>
+        <mat-cell fxFlex.xs="25" fxFlex="15" *matCellDef="let user"> {{ user.cityHallName }} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="secName">
-        <mat-header-cell fxFlex="30" *matHeaderCellDef mat-sort-header> Secretaria </mat-header-cell>
-        <mat-cell fxFlex="30" *matCellDef="let user"> {{ user.secName }} </mat-cell>
+        <mat-header-cell fxHide.xs fxFlex="30" *matHeaderCellDef mat-sort-header> Secretaria </mat-header-cell>
+        <mat-cell fxHide.xs fxFlex="30" *matCellDef="let user"> {{ user.secName }} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="actions">
-        <mat-header-cell fxFlex="10" *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
-        <mat-cell fxFlex="10" *matCellDef="let user">
-
-          <button mat-icon-button matTooltip="Editar Prefeitura" (click)="openDialogEdit(user)">
-            <mat-icon>edit</mat-icon>
+        <mat-header-cell fxFlex.xs="15" fxFlex="10" *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
+        <mat-cell fxFlex.xs="15" fxFlex="10" *matCellDef="let user">
+          <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon class="material-symbols-outlined">
+              more_vert
+            </mat-icon>
           </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item matTooltip="Editar Usuário" (click)="openDialogEdit(user)">
+              <mat-icon class="material-symbols-outlined">edit</mat-icon> Editar Usuário
+            </button>
 
-          <button mat-icon-button matTooltip="Apagar Prefeitura" (click)="deleteUser(user.userCode)">
-            <mat-icon>delete</mat-icon>
-          </button>
+            <button mat-menu-item matTooltip="Apagar Usuário" (click)="deleteUser(user.userCode)">
+              <mat-icon class="material-symbols-outlined">delete</mat-icon> Apagar Usuário
+            </button>
+          </mat-menu>
         </mat-cell>
       </ng-container>
 

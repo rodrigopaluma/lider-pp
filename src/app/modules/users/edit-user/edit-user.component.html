@@ -3,7 +3,7 @@
   <h3 *ngIf="data">Edição de Usuário</h3>
 </div>
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-  <div fxLayout="row wrap" fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
+  <div fxLayout="row wrap" fxLayout.xs="column" fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
     <div fxFlex="33" fxFlexFill>
       <mat-form-field appearance="outline" [style.width]="'98%'">
         <mat-label>Nome do Usuário</mat-label>
@@ -55,7 +55,9 @@
         <mat-hint>{{userForm.value?.sound}}</mat-hint>
       </mat-form-field>
     </div>
-    <button mat-dialog-close mat-raised-button>Fechar</button>
-    <button type="submit" [mat-dialog-close]="true" mat-raised-button color="primary" [disabled]="!userForm.valid">Salvar</button>
+    <div fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
+      <button mat-dialog-close mat-raised-button>Fechar</button>
+      <button type="submit" [mat-dialog-close]="true" mat-raised-button color="primary" [disabled]="!userForm.valid">Salvar</button>
+    </div>
   </div>
 </form>
