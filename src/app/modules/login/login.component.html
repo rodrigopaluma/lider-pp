@@ -1,11 +1,14 @@
-<div fxLayout="row" fxFlex="100%" [style.height]="'100vh'" fxLayoutAlign="center center">
-  <div class="formBox" fxLayout="column" fxFlex="30" fxFlexFill>
+<div fxLayout="row" fxLayout.xs="column"  fxFlex="100%" [style.height]="'100vh'" fxLayoutAlign="center center">
+  <div class="formBox" fxLayout="column" fxFlex.xs="80" fxFlex="30" fxFlexFill>
+    <!--Logotipo-->
     <div class="img-header">
       <img class="logotipo" src="../../../assets/images/logotipo-lider-politicas-publicas.png"
         alt="Líder Políticas Públicas" /><br>
       <span>Líder Políticas Públicas</span>
     </div>
-    <div class="form">
+    <!--Formulário Entrar-->
+    <div *ngIf="!isRegistred" class="form">
+      <h1>Entrar</h1>
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Usuario</mat-label>
         <input matInput type="email" #userEmail required>
@@ -16,6 +19,22 @@
       </mat-form-field>
       <button type="button" (click)="authService.SignIn(userEmail.value, userPassword.value)" [style.width]="'100%'" mat-flat-button color="primary">Entrar</button>
     </div>
+    <!--Formulário Registrar-->
+    <div *ngIf="isRegistred" class="form">
+      <h1>Registre-se</h1>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Insira seu E-mail</mat-label>
+        <input matInput type="email" #userEmail required>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Insira sua senha</mat-label>
+        <input matInput type="password" #userPwd required>
+      </mat-form-field>
+      <button type="button" (click)="authService.SignUp(userEmail.value, userPwd.value)" [style.width]="'100%'" mat-flat-button color="primary">Cadastrar</button>
+    </div>
+    <button *ngIf="!isRegistred" (click)="verifyStatusUser()" mat-button>Registre-se</button>
+    <button *ngIf="isRegistred" (click)="verifyStatusUser()" mat-button>Entrar</button>
+    <button (click)="lostPassword()" mat-button>Esqueceu sua senha?</button>
   </div>
-  <div class="imageBox" fxFlex="70" fxFlexFill></div>
+  <div class="imageBox" fxFlex.xs="20" fxFlex="70" fxFlexFill></div>
 </div>

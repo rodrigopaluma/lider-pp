@@ -11,10 +11,19 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router, public authService: AuthService) { }
 
+  isRegistred: boolean = false;
+
   ngOnInit(): void {
     localStorage.removeItem('user')
   }
 
+  verifyStatusUser() {
+    this.isRegistred = !this.isRegistred;
+  }
+
+  lostPassword() {
+    console.log('Modal Perdeu a Senha')
+  }
 
 
 }

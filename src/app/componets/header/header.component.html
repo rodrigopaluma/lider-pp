@@ -29,12 +29,12 @@
         <span>Prefeituras</span>
       </button>
       <mat-divider></mat-divider>
-      <button mat-menu-item
+      <!-- <button mat-menu-item
         routerLink="/secretarias"
         routerLinkActive="active">
         <mat-icon>location_city</mat-icon>
         <span>Secretarias</span>
-      </button>
+      </button> -->
       <mat-divider></mat-divider>
       <button mat-menu-item
         routerLink="/comunicados"
@@ -43,7 +43,7 @@
         <span>Comunicados</span>
       </button>
       <mat-divider></mat-divider>
-      <button mat-menu-item>
+      <!-- <button mat-menu-item>
         <mat-icon>cloud_download</mat-icon>
         <span>Importação</span>
       </button>
@@ -51,7 +51,7 @@
       <button mat-menu-item>
         <mat-icon>cloud_upload</mat-icon>
         <span>Exportação</span>
-      </button>
+      </button> -->
       <mat-divider></mat-divider>
       <button mat-menu-item
         routerLink="/usuarios"
@@ -67,12 +67,12 @@
         <span>Mensagens</span>
       </button>
       <mat-divider></mat-divider>
-      <button mat-menu-item>
+      <!-- <button mat-menu-item>
         <mat-icon>person</mat-icon>
         <span>Meu perfil</span>
-      </button>
+      </button> -->
       <mat-divider></mat-divider>
-      <button mat-menu-item>
+      <button (click)="authService.SignOut()" mat-menu-item>
         <mat-icon>logout</mat-icon>
         <span>Sair</span>
       </button>
