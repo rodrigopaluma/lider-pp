@@ -39,6 +39,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment.prod';
 import { AuthService } from './shared/services/auth.service';
+import { EditMessageComponent } from './modules/messages/edit-message/edit-message.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { AuthService } from './shared/services/auth.service';
     EditCityHallComponent,
     EditSecretaryComponent,
     EditUserComponent,
-    DashboardComponent
+    DashboardComponent,
+    EditMessageComponent
   ],
   imports: [
     BrowserModule,

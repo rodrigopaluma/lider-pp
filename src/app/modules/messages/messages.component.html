@@ -1,1 +1,63 @@
-<p>messages works!</p>
+<div [style.width]="'1000px'" fxLayout="column" fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
+  <div fxLayout="row wrap" fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
+    <mat-form-field appearance="outline" [style.margin-top]="'10px'" fxFlex="25" fxFlex.xs="70">
+      <mat-label>Busca</mat-label>
+      <input matInput  placeholder="Efetue a sua busca" disabled>
+    </mat-form-field>
+
+    <button (click)="openDialog()" mat-mini-fab matTooltip="Incluir Secretaria" color="primary" aria-label="Incluir Secretaria">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div *ngIf="mensagens else loading" fxLayout="column" fxFlex="100" fxFlexFill>
+
+    <mat-table #table [dataSource]="mensagens" matSort [trackBy]="trackByUid" class="animate">
+
+      <ng-container matColumnDef="messageTitleMessage">
+        <mat-header-cell fxFlex="70" *matHeaderCellDef mat-sort-header> Título da Mensagem </mat-header-cell>
+        <mat-cell fxFlex="70" *matCellDef="let message"> {{ message.messageTitleMessage }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="messageIssuer">
+        <mat-header-cell fxHide.xs fxFlex="20" *matHeaderCellDef mat-sort-header> Enviado por </mat-header-cell>
+        <mat-cell fxHide.xs fxFlex="20" *matCellDef="let message"> {{ message.messageIssuer }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="messageReceiver">
+        <mat-header-cell fxHide.xs fxFlex="20" *matHeaderCellDef mat-sort-header> Recebido por </mat-header-cell>
+        <mat-cell fxHide.xs fxFlex="20" *matCellDef="let message"> {{ message.messageReceiver }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="messageReceivingDate">
+        <mat-header-cell fxHide.xs fxFlex="20" *matHeaderCellDef mat-sort-header> Data </mat-header-cell>
+        <mat-cell fxHide.xs fxFlex="20" *matCellDef="let message"> {{ message.messageReceivingDate.toDate() | date:'dd/MM/yyyy HH:mm a' }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell fxFlex="10" *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
+        <mat-cell fxFlex="10" *matCellDef="let message">
+          <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon class="material-symbols-outlined">
+              more_vert
+            </mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item aria-label="Editar" (click)="openDialogEdit(message)">
+              <mat-icon>edit</mat-icon> Editar Mensagem
+            </button>
+
+            <button mat-menu-item aria-label="Deletar" (click)="deleteMessage(message.messageCode)">
+              <mat-icon>delete</mat-icon> Apagar Mensagem
+            </button>
+          </mat-menu>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="animate"></mat-row>
+    </mat-table>
+  </div>
+
+  <ng-template #loading>Nenhuma mensagem cadastrada</ng-template>
+</div>
