@@ -1,1 +1,44 @@
-<p>edit-message works!</p>
+<div fxLayoutAlign="center center">
+  <h3 *ngIf="!data.messageCode">Criar Mensagem</h3>
+  <h3 *ngIf="data.messageCode">Edição de Mensagem</h3>
+</div>
+<form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+  <div fxLayout="column" fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
+    <div fxFlex="100" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'98%'">
+        <mat-label>Título da Mensagem</mat-label>
+        <input matInput formControlName="messageTitleMessage" placeholder="Informe o título da Mensagem" required>
+      </mat-form-field>
+    </div>
+    <div fxFlex="100" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'98%'">
+        <mat-label>Para</mat-label>
+        <input matInput formControlName="messageReceiver" placeholder="Informe o Usuário" required>
+      </mat-form-field>
+    </div>
+    <div fxFlex="100" fxFlexFill>
+      <editor
+        apiKey="pfhsasr400hx2a9mr6kut442gcbipn9ewcmxxfqz2ridn1e2"
+        formControlName="messageDescription"
+        [init]="{
+          height: 500,
+          menubar: false,
+          plugins: [
+          'advlist autolink lists link image charmap print preview anchor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table paste code help wordcount'
+          ],
+          toolbar:
+          'undo redo | formatselect | bold italic backcolor | \
+          alignleft aligncenter alignright alignjustify | \
+          bullist numlist outdent indent | removeformat | help'
+        }">
+      </editor>
+    </div>
+    <div fxFlex="100" [style.margin-top]="'10px'" fxFlexFill fxLayoutAlign="space-between center">
+      <button fxLayoutAlign="flex-start" mat-dialog-close mat-raised-button>Fechar</button>
+      <button fxLayoutAlign="flex-end" type="submit" [mat-dialog-close]="true" mat-raised-button color="primary" [disabled]="!messageForm.valid">Enviar</button>
+    </div>
+  </div>
+</form>
+

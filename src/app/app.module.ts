@@ -18,6 +18,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { EditCityHallComponent } from './modules/city-halls/edit-city-hall/edit-city-hall.component';
 import { EditSecretaryComponent } from './modules/secretaries/edit-secretary/edit-secretary.component';
 import { EditUserComponent } from './modules/users/edit-user/edit-user.component';
+import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 
 
 // Angular Material
@@ -79,9 +80,13 @@ import { EditMessageComponent } from './modules/messages/edit-message/edit-messa
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    EditorModule
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    //{ provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
+  ],
   bootstrap: [AppComponent],
   exports: [
   ]
