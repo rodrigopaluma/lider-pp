@@ -14,6 +14,8 @@ export interface Activity {
   activityDocument?: string;
 
   cityHallCode?: string;
+  cityHallName?: string;
   secCode?: string;
+  secName?: string;
   activityFollowUp?: string;
 }

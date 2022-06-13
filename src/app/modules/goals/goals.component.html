@@ -1,1 +1,97 @@
-<p>goals works!</p>
+<div fxLayout="column" fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
+  <div fxLayout="row wrap" fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
+    <mat-form-field appearance="outline" [style.margin-top]="'10px'" fxFlex="25" fxFlex.xs="70">
+      <mat-label>Busca</mat-label>
+      <input matInput  placeholder="Filter">
+    </mat-form-field>
+
+    <button (click)="openDialog()" mat-mini-fab matTooltip="Novo Usuário" color="primary" aria-label="Incluir Demanda">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div fxLayout="column" fxFlex="100" fxFlexFill>
+    <mat-table #table [dataSource]="dataSource" matSort class="animate">
+
+      <!--Nome da Demanda-->
+      <ng-container matColumnDef="activityName">
+        <mat-header-cell fxFlex.xs="60" fxFlex="20" *matHeaderCellDef mat-sort-header> Nome da Demanda </mat-header-cell>
+        <mat-cell fxFlex.xs="60" fxFlex="20" *matCellDef="let activity"> {{ activity.activityName }} </mat-cell>
+      </ng-container>
+
+      <!--Prioridade-->
+      <ng-container matColumnDef="activityPriority">
+        <mat-header-cell fxHide.xs fxFlex="10" *matHeaderCellDef mat-sort-header> Prioridade </mat-header-cell>
+        <mat-cell fxHide.xs fxFlex="10" *matCellDef="let activity">
+          <span class="alta" *ngIf="activity.activityPriority == 'alta'">Alta</span>
+          <span class="media" *ngIf="activity.activityPriority == 'media'">Média</span>
+          <span class="baixa" *ngIf="activity.activityPriority == 'baixa'">Baixa</span>
+        </mat-cell>
+      </ng-container>
+
+      <!--Estado-->
+      <ng-container matColumnDef="activityState">
+        <mat-header-cell fxHide.xs fxFlex="15" *matHeaderCellDef mat-sort-header> Estado </mat-header-cell>
+        <mat-cell fxHide.xs fxFlex="15" *matCellDef="let activity">
+          <span class="emAndamento" *ngIf="activity.activityState == 'em-andamento'">Em Andamento</span>
+          <span class="naoIniciada" *ngIf="activity.activityState == 'nao-iniciada'">Não Iniciada</span>
+          <span class="atrasada" *ngIf="activity.activityState == 'atrasada'">Atrasada</span>
+          <span class="finalizada" *ngIf="activity.activityState == 'finalizada'">Finalizada</span>
+          <span class="cancelada" *ngIf="activity.activityState == 'cancelada'">Cancelada</span>
+        </mat-cell>
+      </ng-container>
+
+      <!--Início e Fim-->
+      <ng-container matColumnDef="startAndEnd">
+        <mat-header-cell fxFlex.xs="25" fxFlex="15" *matHeaderCellDef mat-sort-header> Início/Fim </mat-header-cell>
+        <mat-cell fxFlex.xs="25" fxFlex="15" *matCellDef="let activity">
+          {{ activity.activityEstimatedStart }} - {{ activity.activityEstimatedEnd}}
+        </mat-cell>
+      </ng-container>
+
+      <!--Prefeitura-->
+      <ng-container matColumnDef="cityHallName">
+        <mat-header-cell fxFlex.xs="25" fxFlex="15" *matHeaderCellDef mat-sort-header> Prefeitura </mat-header-cell>
+        <mat-cell fxFlex.xs="25" fxFlex="15" *matCellDef="let activity"> {{ activity.cityHallName }} </mat-cell>
+      </ng-container>
+
+      <!--Secretaria-->
+      <ng-container matColumnDef="secName">
+        <mat-header-cell fxHide.xs fxFlex="30" *matHeaderCellDef mat-sort-header> Secretaria </mat-header-cell>
+        <mat-cell fxHide.xs fxFlex="30" *matCellDef="let activity"> {{ activity.secName }} </mat-cell>
+      </ng-container>
+
+      <!--Valor Estimado-->
+      <ng-container matColumnDef="activityEstimatedValue">
+        <mat-header-cell fxHide.xs fxFlex="30" *matHeaderCellDef mat-sort-header> Valor Estimado </mat-header-cell>
+        <mat-cell fxHide.xs fxFlex="30" *matCellDef="let activity"> {{ activity.activityEstimatedValue | currency:'BRL' }} </mat-cell>
+      </ng-container>
+
+      <!--Ações-->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell fxFlex.xs="15" fxFlex="10" *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
+        <mat-cell fxFlex.xs="15" fxFlex="10" *matCellDef="let activity">
+          <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon class="material-symbols-outlined">
+              more_vert
+            </mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item matTooltip="Editar Demanda" (click)="openDialogEdit(activity.activityCode)">
+              <mat-icon class="material-symbols-outlined">edit</mat-icon> Editar Demanda
+            </button>
+
+            <button mat-menu-item matTooltip="Apagar Demanda" (click)="deleteActivity(activity.activityCode)">
+              <mat-icon class="material-symbols-outlined">delete</mat-icon> Apagar Demanda
+            </button>
+          </mat-menu>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="animate"></mat-row>
+    </mat-table>
+  </div>
+</div>
+
+

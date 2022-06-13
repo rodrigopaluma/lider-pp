@@ -1,0 +1,147 @@
+<div fxLayoutAlign="center center">
+  <h3 *ngIf="!data">Cadastro de Demanda</h3>
+  <h3 *ngIf="data">Edição de Demanda</h3>
+</div>
+<form [formGroup]="activityForm" (ngSubmit)="onSubmit()">
+  <div fxLayout="row wrap" fxLayout.xs="column" fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
+
+    <!--Prefeitura-->
+    <div fxFlex="60" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'98%'">
+        <mat-label>Prefeitura</mat-label>
+        <mat-select formControlName="cityHallName" [compareWith]="compareCity" required>
+          <mat-option>Selecione a Prefeitura</mat-option>
+          <mat-option *ngFor="let item of prefeituras" [value]="item">
+            {{item.cityHallName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="activityForm.hasError('required')">Selecione uma Prefeitura</mat-error>
+        <mat-hint>{{activityForm.value?.sound}}</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <!--Secretaria-->
+    <div fxFlex="40" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'100%'">
+        <mat-label>Secretaria</mat-label>
+        <mat-select formControlName="secName" [compareWith]="compareSec" required>
+          <mat-option>Selecione a Secretaria</mat-option>
+          <mat-option *ngFor="let item of secretarias" [value]="item">
+            {{item.secName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="activityForm.hasError('required')">Selecione uma Secretaria</mat-error>
+        <mat-hint>{{activityForm.value?.sound}}</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <!--Nome-->
+    <div fxFlex="33" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'98%'">
+        <mat-label>Nome da Demanda</mat-label>
+        <input matInput formControlName="activityName" placeholder="Nome da Demanda" required>
+      </mat-form-field>
+    </div>
+
+    <!--Prioridade-->
+    <div fxFlex="34" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'98%'">
+        <mat-label>Prioridade da Demanda</mat-label>
+        <mat-select formControlName="activityPriority" required>
+          <mat-option>Selecione a Prioridade</mat-option>
+          <mat-option *ngFor="let item of priorityList" [value]="item.value">
+            {{item.viewValue}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="activityForm.hasError('required')">Selecione um Perfil</mat-error>
+        <mat-hint>{{activityForm.value?.sound}}</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <!--Estado-->
+    <div fxFlex="33" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'100%'">
+        <mat-label>Estado da Demanda</mat-label>
+        <mat-select formControlName="activityPriority" disable>
+          <mat-option *ngFor="let item of stateList" [value]="item.value">
+            {{item.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!--Início Previsto-->
+    <div fxFlex="25" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'98%'">
+        <mat-label>Previsão de Início</mat-label>
+        <input matInput type="date" formControlName="activityEstimatedStart" required>
+      </mat-form-field>
+    </div>
+
+    <!--Final Previsto-->
+    <div fxFlex="25" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'98%'">
+        <mat-label>Previsão de Conclusão</mat-label>
+        <input matInput type="date" formControlName="activityEstimatedEnd" required>
+      </mat-form-field>
+    </div>
+
+    <!--Início Real-->
+    <div fxFlex="25" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'98%'">
+        <mat-label>Data de Início Real</mat-label>
+        <input matInput type="date" formControlName="activityRealStart" required>
+      </mat-form-field>
+    </div>
+
+    <!--Final Real-->
+    <div fxFlex="25" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'100%'">
+        <mat-label>Data de Conclusão Real</mat-label>
+        <input matInput type="date" formControlName="activityRealEnd" required>
+      </mat-form-field>
+    </div>
+
+    <!--Responsável-->
+    <div fxFlex="33" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'98%'">
+        <mat-label>Responsável pela Demanda</mat-label>
+        <mat-select formControlName="activityResponsible" disable>
+          <mat-option *ngFor="let item of usersList" [value]="item.value">
+            {{item.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!--Valor Previsto-->
+    <div fxFlex="34" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'98%'">
+        <mat-label>Valor Previsto</mat-label>
+        <input matInput type="text" formControlName="activityEstimatedValue" required>
+      </mat-form-field>
+    </div>
+
+    <!--Valor Real-->
+    <div fxFlex="33" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'100%'">
+        <mat-label>Valor Real</mat-label>
+        <input matInput type="text" formControlName="activityRealValue" required>
+      </mat-form-field>
+    </div>
+
+    <!--Arquivos-->
+    <div fxFlex="100" fxFlexFill>
+      <mat-form-field appearance="outline" [style.width]="'100%'">
+        <mat-label>Documentos da Demanda</mat-label>
+        <input matInput disabled value="https://bityli.com/JQNUQ">
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="100" fxFlexFill fxLayoutAlign="space-between center">
+      <button mat-dialog-close mat-raised-button>Fechar</button>
+      <button mat-raised-button color="accent">Enviar Arquivos</button>
+      <button type="submit" [mat-dialog-close]="true" mat-raised-button color="primary" [disabled]="!activityForm.valid">Salvar</button>
+    </div>
+  </div>
+</form>

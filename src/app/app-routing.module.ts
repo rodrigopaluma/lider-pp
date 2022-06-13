@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [GuardGuard]  },
   { path: 'prefeituras', component: CityHallsComponent, canActivate: [GuardGuard] },
   { path: 'secretarias', component: SecretariesComponent, canActivate: [GuardGuard] },
-  { path: 'metas', component: GoalsComponent, canActivate: [GuardGuard] },
+  { path: 'demandas', component: GoalsComponent, canActivate: [GuardGuard] },
   { path: 'usuarios', component: UsersComponent, canActivate: [GuardGuard] },
   { path: 'comunicados', component: AnnouncementsComponent, canActivate: [GuardGuard] },
   { path: 'mensagens', component: MessagesComponent, canActivate: [GuardGuard] },

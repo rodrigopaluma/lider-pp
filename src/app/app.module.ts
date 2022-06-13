@@ -41,6 +41,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment.prod';
 import { AuthService } from './shared/services/auth.service';
 import { EditMessageComponent } from './modules/messages/edit-message/edit-message.component';
+import { EditGoalComponent } from './modules/goals/edit-goal/edit-goal.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { EditMessageComponent } from './modules/messages/edit-message/edit-messa
     EditSecretaryComponent,
     EditUserComponent,
     DashboardComponent,
-    EditMessageComponent
+    EditMessageComponent,
+    EditGoalComponent
   ],
   imports: [
     BrowserModule,
